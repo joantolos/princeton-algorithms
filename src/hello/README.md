@@ -1,5 +1,7 @@
 # Programming Assignment 0: Hello, World
 
+https://coursera.cs.princeton.edu/algs4/assignments/hello/specification.php
+
 _This assignment is optional. Its sole purpose is to ensure that you can write simple Java programs, use `algs4.jar`, and submit them to the Coursera autograder._
 
 1.  **Install our Java programming environment (optional).**  Install our novice-friendly Java programming environment on your computer by following these step-by-step instructions for [Mac OS X](http://lift.cs.princeton.edu/java/mac), [Windows](http://lift.cs.princeton.edu/java/windows), or [Linux](http://lift.cs.princeton.edu/java/linux). On each assignment, use the [Project](hello.zip) from the menu at top.
