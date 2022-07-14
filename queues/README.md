@@ -1,6 +1,15 @@
 # Programming Assignment 2: Queues
 
+## How to compile and run
+
+    $ javac -cp ../lib/* Deque.java Permutation.java
+    $ java -cp "../lib/*:." Deque
+
+## Original link
+
 https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php
+
+## Asignment
 
 Write a generic data type for a deque and a randomized queue. The goal of this assignment is to implement elementary data structures using arrays and linked lists, and to introduce you to generics and iterators.
 

@@ -67,8 +67,8 @@ public class Percolation {
         if (row == n) {
             backwashQU.union(currIndex, btmIndex);  // Bottom
         }
-        tryUnion(row, col, row - 1, col);  // North
-        tryUnion(row, col, row + 1, col);  // South
+        tryUnion(row, col, row - 1, col);  // North 
+        tryUnion(row, col, row + 1, col);  // South        
         tryUnion(row, col, row, col - 1);  // West
         tryUnion(row, col, row, col + 1);  // East
     }
