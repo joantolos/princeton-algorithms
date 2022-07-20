@@ -20,11 +20,11 @@ Note that _your_ code must be in the _default package_; if you use a `package` s
 
 **The model.** We model a percolation system using an _n_\-by-_n_ grid of _sites_. Each site is either _open_ or _blocked_. A _full_ site is an open site that can be connected to an open site in the top row via a chain of neighboring (left, right, up, down) open sites. We say the system _percolates_ if there is a full site in the bottom row. In other words, a system percolates if we fill all open sites connected to the top row and that process fills some open site on the bottom row. (For the insulating/metallic materials example, the open sites correspond to metallic materials, so that a system that percolates has a metallic path from top to bottom, with full sites conducting. For the porous substance example, the open sites correspond to empty space through which water might flow, so that a system that percolates lets water fill open sites, flowing from top to bottom.)
 
-> ![percolates](../../img/percolates-yes.png)           ![does not percolate](../../img/percolates-no.png)
+> ![percolates](percolates-yes.png)           ![does not percolate](percolates-no.png)
 
 **The problem.** In a famous scientific problem, researchers are interested in the following question: if sites are independently set to be open with probability _p_ (and therefore blocked with probability 1 − _p_), what is the probability that the system percolates? When _p_ equals 0, the system does not percolate; when _p_ equals 1, the system percolates. The plots below show the site vacancy probability _p_ versus the percolation probability for 20-by-20 random grid (left) and 100-by-100 random grid (right).
 
-![Percolation threshold for 20-by-20 grid](../../img/percolation-threshold20.png)                ![Percolation threshold for 100-by-100 grid](../../img/percolation-threshold100.png)
+![Percolation threshold for 20-by-20 grid](percolation-threshold20.png)                ![Percolation threshold for 100-by-100 grid](percolation-threshold100.png)
 
 When _n_ is sufficiently large, there is a _threshold_ value _p_\* such that when _p_ < _p_\* a random _n_\-by-_n_ grid almost never percolates, and when _p_ > _p_\*, a random _n_\-by-_n_ grid almost always percolates. No mathematical solution for determining the percolation threshold _p_\* has yet been derived. Your task is to write a computer program to estimate _p_\*.
 
@@ -74,19 +74,19 @@ For example, if sites are opened in a 20-by-20 lattice according to the snapshot
 
      
 
-![Percolation 50 sites](../../img/percolation-50.png)
+![Percolation 50 sites](percolation-50.png)
 
 _50 open sites_
 
-![Percolation 100 sites](../../img/percolation-100.png)
+![Percolation 100 sites](percolation-100.png)
 
 _100 open sites_
 
-![Percolation 150 sites](../../img/percolation-150.png)
+![Percolation 150 sites](percolation-150.png)
 
 _150 open sites_
 
-![Percolation 204 sites](../../img/percolation-204.png)
+![Percolation 204 sites](percolation-204.png)
 
 _204 open sites_
 

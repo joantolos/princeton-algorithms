@@ -1,5 +1,3 @@
-package sandbox;
-
 import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Comparator;
@@ -51,8 +49,10 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        /* YOUR CODE HERE */
-        return 0;
+        if (this.x == that.x && this.y == that.y) return Double.NEGATIVE_INFINITY;
+        else if (that.y == this.y) return 0.0;
+        else if (this.x == that.x) return Double.POSITIVE_INFINITY;
+        else return (double) (that.y - this.y) / (that.x - this.x);
     }
 
     /**
@@ -68,8 +68,9 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
-        /* YOUR CODE HERE */
-        return 0;
+        if (this.x == that.x && this.y == that.y) return 0;
+        else if (this.y < that.y || (this.y == that.y && this.x < that.x)) return -1;
+        else return 1;
     }
 
     /**
@@ -79,10 +80,17 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        /* YOUR CODE HERE */
-        return null;
+        return new SlopeComparator();
     }
 
+    private class SlopeComparator implements Comparator<Point> {
+        // Formally, the point (x1, y1) is less than the point (x2, y2) if and only if
+        // the slope (y1 − y0) / (x1 − x0) is less than the slope (y2 − y0) / (x2 − x0)
+        @Override
+        public int compare(Point o1, Point o2) {
+            return Double.compare(slopeTo(o1), slopeTo(o2));
+        };
+    }
 
     /**
      * Returns a string representation of this point.
@@ -99,6 +107,9 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point a = new Point(0, 0);
+        Point b = new Point(1, 0);
+
+        System.out.println(a.compareTo(b));
     }
 }

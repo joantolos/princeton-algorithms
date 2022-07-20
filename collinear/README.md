@@ -1,6 +1,16 @@
-Programming Assignment 3: Collinear Points
+# Programming Assignment 3: Collinear Points
+
+## How to compile and run
+
+    $ javac -cp ../lib/* BruteCollinearPoints.java LineSegment.java Point.java Client.java 
+    $ java -cp ../lib/* Client < input6.txt
+    $ java -cp ../lib/* Client < input8.txt
+
+## Original link
 
 https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php
+
+## Assignment
 
 Write a program to recognize line patterns in a given set of points.
 
