@@ -61,7 +61,7 @@ public class Board {
             for (int j = 0; j < n; j ++) {
                 int goal = this.goal[(i * n) + j];
                 int tile = tiles[i][j];
-                if (goal != 0 && tile != 0 && goal != tile) {
+                if (goal != tile) {
                     k++;
                 }
             }
@@ -72,15 +72,16 @@ public class Board {
     // sum of Manhattan distances between tiles and goal
     public int manhattan() {
         int manhattan = 0;
-//        for (int i = 0; i < n; i ++) {
-//            for (int j = 0; j < n; j ++) {
-//                int goal = this.goal[(i * n) + j];
-//                int tile = tiles[i][j];
-//                if (goal != 0 && tile != 0 && goal != tile) {
-//                    k++;
-//                }
-//            }
-//        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (tiles[i][j] != 0 && tiles[i][j] != (n * i + j + 1)) {
+                    int x = (tiles[i][j] / n);
+                    int y = (tiles[i][j] - x * n);
+                    manhattan += Math.abs(i - x) + Math.abs(j - y);
+                }
+            }
+        }
         return manhattan;
     }
 
@@ -108,10 +109,33 @@ public class Board {
     public static void main(String[] args) {
 //        printingTheBoard();
 //        hammingTest();
+        manhattanTest();
     }
 
+    private static void manhattanTest() {
+        // 5 tiles out of place
+        // manhattan = 1 + 2 + 2 + 2 + 3 = 10
+        // 8 1 3
+        // 4 0 2
+        // 7 6 5
+        int[][] fiveTilesOut = new int[3][3];
+        fiveTilesOut[0][0] = 1;
+        fiveTilesOut[0][1] = 2;
+        fiveTilesOut[0][2] = 0;
+
+        fiveTilesOut[1][0] = 6;
+        fiveTilesOut[1][1] = 5;
+        fiveTilesOut[1][2] = 4;
+
+        fiveTilesOut[2][0] = 7;
+        fiveTilesOut[2][1] = 8;
+        fiveTilesOut[2][2] = 3;
+
+        System.out.println(new Board(fiveTilesOut).hamming());  // Should be 5
+        System.out.println(new Board(fiveTilesOut).manhattan());  // Should be 10
+    }
     private static void hammingTest() {
-        // 6 tiles out of place
+        // 5 tiles out of place
         // 0 1 3
         // 4 2 5
         // 7 8 6
@@ -119,21 +143,20 @@ public class Board {
         // 1 2 3
         // 4 5 6
         // 7 8 0
-        int[][] sixTilesOut = new int[3][3];
-        sixTilesOut[0][0] = 0;
-        sixTilesOut[0][1] = 1;
-        sixTilesOut[0][2] = 3;
+        int[][] fiveTilesOut = new int[3][3];
+        fiveTilesOut[0][0] = 0;
+        fiveTilesOut[0][1] = 1;
+        fiveTilesOut[0][2] = 3;
 
-        sixTilesOut[1][0] = 4;
-        sixTilesOut[1][1] = 2;
-        sixTilesOut[1][2] = 5;
+        fiveTilesOut[1][0] = 4;
+        fiveTilesOut[1][1] = 2;
+        fiveTilesOut[1][2] = 5;
 
-        sixTilesOut[2][0] = 7;
-        sixTilesOut[2][1] = 8;
-        sixTilesOut[2][2] = 6;
+        fiveTilesOut[2][0] = 7;
+        fiveTilesOut[2][1] = 8;
+        fiveTilesOut[2][2] = 6;
 
-        Board sixWrongBoard = new Board(sixTilesOut);
-        System.out.println(sixWrongBoard.hamming());
+        System.out.println(new Board(fiveTilesOut).hamming());    // should be 6
 
         // 2 tiles out of place
         // 1 2 0
@@ -156,8 +179,7 @@ public class Board {
         twoTilesOut[2][1] = 8;
         twoTilesOut[2][2] = 3;
 
-        Board twoWrongBoard = new Board(twoTilesOut);
-        System.out.println(twoWrongBoard.hamming());
+        System.out.println(new Board(twoTilesOut).hamming());    // should be 2
     }
 
     private static void printingTheBoard() {
