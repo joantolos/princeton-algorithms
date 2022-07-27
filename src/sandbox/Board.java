@@ -1,6 +1,8 @@
 package sandbox;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Board {
 
@@ -92,23 +94,108 @@ public class Board {
 
     // does this board equal y?
     public boolean equals(Object y) {
-        return false;
+        if (this == y) {
+            return true;
+        }
+        if ((y == null) || (y.getClass() != this.getClass())) {
+            return false;
+        }
+
+        Board board = (Board) y;
+        if (this.dimension() != ((Board) y).dimension()) {
+            return false;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (tiles[i][j] != board.tiles[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        return null;
+        List<Board> neighbours = new LinkedList<>();
+        int[][] neighboursarray = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                neighboursarray[i][j] = tiles[i][j];
+            }
+        }
+
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (tiles[i][j] == 0 && i - 1 >= 0) {
+                    neighboursarray[i][j] = neighboursarray[i - 1][j];
+                    neighboursarray[i - 1][j] = 0;
+                    neighbours.add(new Board(neighboursarray));
+                    neighboursarray[i][j] = 0;
+                    neighboursarray[i - 1][j] = tiles[i - 1][j];
+                    c = 1;
+                }
+                if (tiles[i][j] == 0 && i + 1 < n) {
+                    neighboursarray[i][j] = neighboursarray[i + 1][j];
+                    neighboursarray[i + 1][j] = 0;
+                    neighbours.add(new Board(neighboursarray));
+                    neighboursarray[i][j] = 0;
+                    neighboursarray[i + 1][j] = tiles[i + 1][j];
+                    c = 1;
+                }
+                if (tiles[i][j] == 0 && j - 1 >= 0) {
+                    neighboursarray[i][j] = neighboursarray[i][j - 1];
+                    neighboursarray[i][j - 1] = 0;
+                    neighbours.add(new Board(neighboursarray));
+                    neighboursarray[i][j] = 0;
+                    neighboursarray[i][j - 1] = tiles[i][j - 1];
+                    c = 1;
+                }
+                if (tiles[i][j] == 0 && j + 1 < n) {
+                    neighboursarray[i][j] = neighboursarray[i][j + 1];
+                    neighboursarray[i][j + 1] = 0;
+                    neighbours.add(new Board(neighboursarray));
+                    neighboursarray[i][j] = 0;
+                    neighboursarray[i][j + 1] = tiles[i][j + 1];
+                    c = 1;
+                }
+                if (c == 1) {
+                    break;
+                }
+            }
+            if (c == 1) {
+                break;
+            }
+        }
+
+        return neighbours;
     }
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        return null;
+        int[][] twinall = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                twinall[i][j] = tiles[i][j];
+            }
+        }
+        if (tiles[0][0] != 0 && tiles[0][1] != 0) {
+            twinall[0][0] = tiles[0][1];
+            twinall[0][1] = tiles[0][0];
+        } else {
+            twinall[1][0] = tiles[1][1];
+            twinall[1][1] = tiles[1][0];
+        }
+        return new Board(twinall);
     }
 
     // unit testing (not graded)
     public static void main(String[] args) {
-//        printingTheBoard();
-//        hammingTest();
+        printingTheBoard();
+        hammingTest();
         manhattanTest();
     }
 
